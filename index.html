@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>nazsapict ✨ - Aesthetic Photobooth Studio (by ssbillanzila)</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Sacramento&family=Outfit:wght@400;600;700;800&family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- QRCode.js library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'nazsa-pink': '#FFD1DC',
+                        'nazsa-rose': '#FF9EAA',
+                        'nazsa-cream': '#FFF9F5',
+                        'nazsa-accent': '#E88D9C',
+                        'coquette-lavender': '#E2D9F3',
+                        'y2k-purple': '#7C3AED'
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        cursive: ['Sacramento', 'cursive'],
+                        display: ['Outfit', 'sans-serif'],
+                        fun: ['Fredoka', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #FFF9F5;
+            background-image: radial-gradient(#FFD1DC 0.9px, transparent 0.9px), radial-gradient(#FFD1DC 0.9px, #FFF9F5 0.9px);
+            background-size: 28px 28px;
+            background-position: 0 0, 14px 14px;
+            color: #4A3E3D;
+            overflow-x: hidden;
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 209, 220, 0.8);
+            box-shadow: 0 14px 40px -10px rgba(232, 141, 156, 0.25);
+        }
+
+        /* Solid Cute & Polkadot Backgrounds (Tanpa Gradasi) */
+        .bg-polaroid-white { background-color: #FFFFFF !important; background-image: none !important; }
+        .bg-polaroid-vintage { background-color: #FDFBF7 !important; background-image: none !important; }
+        .bg-coquette-pink { background-color: #FFD1DC !important; background-image: none !important; }
+        .bg-milk-white { background-color: #FAF8F5 !important; background-image: none !important; }
+        .bg-sanrio-pastel { background-color: #FCE7F3 !important; background-image: none !important; }
+        .bg-solid-black { background-color: #18181B !important; color: #F472B6 !important; background-image: none !important; }
+        
+        /* Polkadot Background Pattern */
+        .bg-polkadot-pink {
+            background-color: #FFD1DC !important;
+            background-image: radial-gradient(#FFFFFF 4px, transparent 4px) !important;
+            background-size: 24px 24px !important;
+        }
+        .bg-polkadot-blue {
+            background-color: #1E3A8A !important;
+            background-image: radial-gradient(#93C5FD 4px, transparent 4px) !important;
+            background-size: 24px 24px !important;
+            color: #FFFFFF !important;
+        }
+
+        /* Premium Reference Templates Styling */
+        .bg-navy-ribbon { background-color: #1B2A4A !important; background-image: radial-gradient(#3A4F7A 2px, transparent 2px) !important; background-size: 16px 16px !important; color: #FFFFFF !important; }
+        .bg-classical-ticket { background-color: #4A0E17 !important; background-image: none !important; color: #F3E8EE !important; }
+        .bg-cartoon-y2k { background-color: #FCE7F3 !important; background-image: radial-gradient(#FBCFE8 3px, transparent 3px) !important; background-size: 20px 20px !important; }
+
+        /* Photo Filters (15+ Options) */
+        .filter-normal { filter: none; }
+        .filter-sepia { filter: sepia(0.65) contrast(1.1) brightness(0.95); }
+        .filter-bw { filter: grayscale(1) contrast(1.25) brightness(1.05); }
+        .filter-softglow { filter: brightness(1.18) contrast(0.92) saturate(1.2); }
+        .filter-warm { filter: sepia(0.25) saturate(1.4) hue-rotate(-12deg) brightness(1.05); }
+        .filter-cyber { filter: contrast(1.3) saturate(1.8) hue-rotate(180deg); }
+        .filter-vintage { filter: sepia(0.35) contrast(0.9) brightness(1.1) hue-rotate(-5deg); }
+        .filter-noir { filter: grayscale(1) contrast(1.7) brightness(0.9); }
+        .filter-pinkdream { filter: sepia(0.2) saturate(1.6) hue-rotate(310deg) brightness(1.1); }
+        .filter-goldenhour { filter: sepia(0.4) saturate(1.5) hue-rotate(-20deg) brightness(1.1); }
+        .filter-lavender { filter: hue-rotate(240deg) saturate(1.3) brightness(1.05); }
+        .filter-indiefilm { filter: contrast(1.1) brightness(0.95) saturate(0.85) sepia(0.15); }
+        .filter-dramatic { filter: contrast(1.5) brightness(0.95); }
+        .filter-sunset { filter: sepia(0.3) saturate(1.7) hue-rotate(-30deg); }
+        .filter-coolblue { filter: hue-rotate(180deg) saturate(1.2) brightness(1.05); }
+
+        .screen-flash-active {
+            box-shadow: inset 0 0 50px 20px #ffffff, 0 0 30px 10px #ffffff;
+            transition: box-shadow 0.1s ease-in-out;
+        }
+
+        .sticker-item {
+            cursor: grab;
+            user-select: none;
+            touch-action: none;
+            position: absolute;
+            transition: transform 0.1s ease;
+        }
+        .sticker-item:active {
+            cursor: grabbing;
+            transform: scale(1.2);
+        }
+
+        @keyframes pulseCountdown {
+            0% { transform: scale(0.3); opacity: 0; }
+            50% { transform: scale(1.3); opacity: 1; }
+            100% { transform: scale(1); opacity: 0; }
+        }
+        .animate-countdown {
+            animation: pulseCountdown 0.9s cubic-bezier(0.175, 0.885, 0.32, 1.275) infinite;
+        }
+
+        @keyframes floatAcc {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-14px) rotate(8deg); }
+        }
+        .animate-float {
+            animation: floatAcc 3.8s ease-in-out infinite;
+        }
+
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #FFF9F5; }
+        ::-webkit-scrollbar-thumb { background: #FF9EAA; border-radius: 10px; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col font-sans">
+
+    <!-- UNIQUE & CUTE INTRO SCREEN -->
+    <div id="intro-screen" class="fixed inset-0 z-50 bg-pink-100 flex flex-col items-center justify-center p-4 sm:p-6 text-center overflow-y-auto">
+        <!-- Floating Emojis -->
+        <span class="absolute top-10 left-10 text-6xl animate-float opacity-80 pointer-events-none">🎀</span>
+        <span class="absolute top-20 right-12 text-7xl animate-float opacity-80 pointer-events-none" style="animation-delay: 1s;">✨</span>
+        <span class="absolute bottom-16 left-16 text-7xl animate-float opacity-80 pointer-events-none" style="animation-delay: 1.5s;">💖</span>
+        <span class="absolute bottom-12 right-20 text-6xl animate-float opacity-80 pointer-events-none" style="animation-delay: 0.5s;">🧸</span>
+
+        <div class="max-w-xl w-full glass-panel p-6 sm:p-10 rounded-3xl flex flex-col items-center gap-5 shadow-2xl border-4 border-pink-300 relative z-10 my-auto">
+            <div class="w-24 h-24 rounded-3xl bg-nazsa-rose flex items-center justify-center text-white text-5xl shadow-xl shadow-pink-300 transform hover:rotate-6 transition">
+                📸✨
+            </div>
+
+            <div>
+                <h1 class="font-cursive text-6xl font-bold text-pink-600 drop-shadow-sm">nazsapict ✨</h1>
+                <p class="text-xs font-bold text-gray-600 uppercase tracking-widest mt-1">Aesthetic Viral Photobooth Studio</p>
+            </div>
+
+            <!-- Instagram Follow Button (Requested) -->
+            <a href="https://www.instagram.com/ssbillanzila/?utm_source=ig_web_button_share_sheet" target="_blank" class="w-full py-3 bg-gradient-to-r from-purple-500 via-pink-500 to-amber-400 text-white font-bold text-xs rounded-2xl shadow-md flex items-center justify-center gap-2 hover:opacity-95 transition">
+                <i class="fa-brands fa-instagram text-base"></i> Follow My IG @ssbillanzila 💖
+            </a>
+
+            <!-- Info Box -->
+            <div class="w-full bg-white p-4 rounded-2xl border-2 border-pink-200 text-left text-xs text-gray-700 flex flex-col gap-2 shadow-sm">
+                <p class="font-bold text-sm text-pink-600 flex items-center gap-1.5">
+                    🎀 Welcome to ssbillanzila Studio! ✨
+                </p>
+                <p class="leading-relaxed">
+                    Nikmati pengalaman photobooth aesthetic terlengkap dengan fitur <strong>Premium Templates</strong> (Blue Navy, Classical Ticket, Polkadot Y2K), Ring Flash, 15+ Filter Wajah, Stiker & Logo Kampus (UI, USU, ITB, UGM, UNDIP, UMSU, UNIMED, POLMED, BINUS), Background Polkadot & Solid lucu, serta Edit Teks Frame langsung!
+                </p>
+            </div>
+
+            <!-- Creator Credit -->
+            <div class="w-full bg-pink-50 p-3 rounded-2xl border border-pink-200 flex items-center justify-between text-xs">
+                <span class="font-bold text-gray-700">
+                    <i class="fa-solid fa-heart text-nazsa-rose"></i> Created by <strong class="text-pink-600">ssbillanzila</strong>
+                </span>
+                <a href="mailto:nazilarplraziii@gmail.com" class="text-[11px] font-semibold text-gray-500 hover:text-pink-600 transition flex items-center gap-1">
+                    <i class="fa-solid fa-envelope text-pink-400"></i> Contact
+                </a>
+            </div>
+
+            <button onclick="startAppFromIntro()" class="w-full py-4 bg-nazsa-rose hover:bg-pink-400 text-white font-fun font-bold text-lg rounded-2xl shadow-xl shadow-pink-200 transition-transform active:scale-95 flex items-center justify-center gap-3">
+                <i class="fa-solid fa-camera"></i> Masuk Photobooth Studio Now! 🚀
+            </button>
+        </div>
+    </div>
+
+    <!-- MAIN APP STUDIO -->
+    <div id="main-app" class="hidden flex-col min-h-screen">
+        <!-- Header -->
+        <header class="sticky top-0 z-40 glass-panel border-b border-pink-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
+                <div class="flex items-center gap-3 cursor-pointer" onclick="goToIntro()">
+                    <div class="w-10 h-10 rounded-2xl bg-nazsa-rose flex items-center justify-center text-white shadow-md shadow-pink-200">
+                        <i class="fa-solid text-lg">✨</i>
+                    </div>
+                    <div>
+                        <h1 class="font-cursive text-3xl font-bold text-pink-600 leading-none">nazsapict</h1>
+                        <p class="text-[10px] uppercase tracking-widest text-gray-500 font-semibold">by ssbillanzila</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-2">
+                    <a href="https://www.instagram.com/ssbillanzila/?utm_source=ig_web_button_share_sheet" target="_blank" class="px-3 py-1.5 bg-gradient-to-r from-purple-500 to-pink-500 text-white text-xs font-bold rounded-full shadow-xs flex items-center gap-1.5 hover:opacity-90">
+                        <i class="fa-brands fa-instagram"></i> IG @ssbillanzila
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8 flex flex-col gap-6">
+
+            <!-- Step Progress Indicator -->
+            <div class="flex items-center justify-center gap-2 sm:gap-4 my-1">
+                <button id="step-btn-1" onclick="goToStep(1)" class="step-tab flex items-center gap-2 px-4 py-2 rounded-full bg-nazsa-rose text-white text-xs font-semibold shadow-md shadow-pink-200 transition-all">
+                    <span class="w-5 h-5 rounded-full bg-white text-nazsa-rose flex items-center justify-center text-xs font-bold">1</span>
+                    Camera Studio
+                </button>
+                <div class="w-8 h-0.5 bg-pink-200"></div>
+                <button id="step-btn-2" onclick="goToStep(2)" class="step-tab flex items-center gap-2 px-4 py-2 rounded-full bg-white text-gray-400 border border-pink-100 text-xs font-semibold transition-all">
+                    <span class="w-5 h-5 rounded-full bg-gray-100 text-gray-500 flex items-center justify-center text-xs font-bold">2</span>
+                    Retake, Frame & Stiker
+                </button>
+                <div class="w-8 h-0.5 bg-pink-200"></div>
+                <button id="step-btn-3" onclick="goToStep(3)" class="step-tab flex items-center gap-2 px-4 py-2 rounded-full bg-white text-gray-400 border border-pink-100 text-xs font-semibold transition-all">
+                    <span class="w-5 h-5 rounded-full bg-gray-100 text-gray-500 flex items-center justify-center text-xs font-bold">3</span>
+                    Download & QR
+                </button>
+            </div>
+
+            <!-- SECTION 1: PHOTO STUDIO -->
+            <section id="section-studio" class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
+                <!-- Left: Viewfinder & Ring Flash -->
+                <div class="lg:col-span-2 glass-panel p-5 rounded-3xl flex flex-col items-center gap-4 relative overflow-hidden">
+                    <div class="w-full flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <span class="text-xs font-bold text-gray-600 flex items-center gap-2">
+                                <span class="w-2.5 h-2.5 rounded-full bg-red-500 animate-ping"></span>
+                                Live Viewfinder
+                            </span>
+                            <button onclick="toggleScreenFlash()" id="ring-flash-toggle" class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-gray-100 text-gray-600 border border-gray-200 flex items-center gap-1 transition">
+                                <i class="fa-solid fa-bolt text-yellow-500"></i> Ring Flash: <span id="flash-status-text">OFF</span>
+                            </button>
+                        </div>
+                        
+                        <div id="flash-overlay" class="pointer-events-none fixed inset-0 bg-white opacity-0 transition-opacity duration-150 z-50"></div>
+                        
+                        <div class="flex items-center gap-2 bg-pink-50 p-1 rounded-xl border border-pink-100">
+                            <span class="text-xs text-gray-500 font-medium px-2">Timer:</span>
+                            <button onclick="setTimer(3)" id="timer-3" class="timer-btn px-3 py-1 rounded-lg text-xs font-bold bg-white text-pink-600 shadow-xs">3s</button>
+                            <button onclick="setTimer(5)" id="timer-5" class="timer-btn px-3 py-1 rounded-lg text-xs font-bold text-gray-500 hover:bg-white/50">5s</button>
+                            <button onclick="setTimer(10)" id="timer-10" class="timer-btn px-3 py-1 rounded-lg text-xs font-bold text-gray-500 hover:bg-white/50">10s</button>
+                        </div>
+                    </div>
+
+                    <!-- Webcam Container -->
+                    <div id="webcam-box" class="relative w-full max-w-lg aspect-[4/3] bg-black rounded-2xl overflow-hidden shadow-inner border-4 border-white transition-all duration-200">
+                        <video id="webcam" autoplay playsinline class="w-full h-full object-cover transform -scale-x-100 filter-normal"></video>
+                        
+                        <div id="countdown-overlay" class="hidden absolute inset-0 bg-black/40 backdrop-blur-xs flex items-center justify-center z-10">
+                            <span id="countdown-text" class="text-white font-display text-8xl font-black animate-countdown drop-shadow-lg">3</span>
+                        </div>
+
+                        <div id="capture-status" class="hidden absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/70 text-white text-xs px-4 py-1.5 rounded-full backdrop-blur-md">
+                            Mengambil Foto <span id="capture-count">1</span>/...
+                        </div>
+                    </div>
+
+                    <!-- Filter Options (15+ Options) -->
+                    <div class="w-full flex flex-col gap-3">
+                        <div class="flex items-center justify-start gap-2 overflow-x-auto py-2 w-full">
+                            <span class="text-xs font-semibold text-gray-500 mr-1 shrink-0">Filter Wajah:</span>
+                            <button onclick="applyFilter('filter-normal')" class="filter-btn px-3 py-1 rounded-full text-xs font-medium bg-pink-100 text-pink-700 shrink-0">Normal</button>
+                            <button onclick="applyFilter('filter-softglow')" class="filter-btn px-3 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-600 shrink-0">Soft Beauty ✨</button>
+                            <button onclick="applyFilter('filter-goldenhour')" class="filter-btn px-3 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-600 shrink-0">Golden Hour 🌇</button>
+                            <button onclick="applyFilter('filter-lavender')" class="filter-btn px-3 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-600 shrink-0">Soft Lavender 🪻</button>
+                            <button onclick="applyFilter('filter-vintage')" class="filter-btn px-3 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-600 shrink-0">Vintage Film 🎞️</button>
+                            <button onclick="applyFilter('filter-indiefilm')" class="filter-btn px-3 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-600 shrink-0">Indie Movie 📽️</button>
+                            <button onclick="applyFilter('filter-warm')" class="filter-btn px-3 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-600 shrink-0">Warm Sunset 🌅</button>
+                            <button onclick="applyFilter('filter-pinkdream')" class="filter-btn px-3 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-600 shrink-0">Pink Dream 🎀</button>
+                            <button onclick="applyFilter('filter-bw')" class="filter-btn px-3 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-600 shrink-0">B&W Classic 🖤</button>
+                            <button onclick="applyFilter('filter-dramatic')" class="filter-btn px-3 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-600 shrink-0">Dramatic 🎬</button>
+                            <button onclick="applyFilter('filter-coolblue')" class="filter-btn px-3 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-600 shrink-0">Cool Blue 🧊</button>
+                        </div>
+
+                        <button id="start-session-btn" onclick="startPhotoSession()" class="w-full py-4 bg-nazsa-rose hover:bg-pink-400 text-white font-bold text-lg rounded-2xl shadow-lg shadow-pink-200 flex items-center justify-center gap-3 transition-transform active:scale-98">
+                            <i class="fa-solid fa-camera text-xl"></i>
+                            Mulai Sesi Foto Opsi Layout
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Right: Layout Selector & Capture Thumbnails -->
+                <div class="glass-panel p-5 rounded-3xl flex flex-col gap-4">
+                    <h2 class="font-bold text-gray-700 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-images text-pink-500"></i>
+                        Pilihan Layout Strip (Termasuk 3 Kiri 3 Kanan)
+                    </h2>
+
+                    <!-- Layout Options Grid -->
+                    <div class="grid grid-cols-2 gap-2 max-h-[220px] overflow-y-auto p-1">
+                        <button onclick="selectLayout('double-6')" id="layout-double-6" class="layout-btn p-2 rounded-xl border-2 border-nazsa-rose bg-pink-50 text-xs font-semibold text-pink-700 flex items-center gap-2">
+                            <i class="fa-solid fa-table-columns"></i> 6 Foto (3 Kiri 3 Kanan)
+                        </button>
+                        <button onclick="selectLayout('vertical-6')" id="layout-vertical-6" class="layout-btn p-2 rounded-xl border-2 border-transparent bg-gray-50 text-xs font-semibold text-gray-600 hover:bg-pink-50 flex items-center gap-2">
+                            <i class="fa-solid fa-bars"></i> 6 Strip Panjang
+                        </button>
+                        <button onclick="selectLayout('double-4')" id="layout-double-4" class="layout-btn p-2 rounded-xl border-2 border-transparent bg-gray-50 text-xs font-semibold text-gray-600 hover:bg-pink-50 flex items-center gap-2">
+                            <i class="fa-solid fa-table-cells font-bold"></i> 4 Foto (2 Kiri 2 Kanan)
+                        </button>
+                        <button onclick="selectLayout('vertical-4')" id="layout-vertical-4" class="layout-btn p-2 rounded-xl border-2 border-transparent bg-gray-50 text-xs font-semibold text-gray-600 hover:bg-pink-50 flex items-center gap-2">
+                            <i class="fa-solid fa-square-poll-vertical"></i> 4 Strip Panjang
+                        </button>
+                        <button onclick="selectLayout('vertical-3')" id="layout-vertical-3" class="layout-btn p-2 rounded-xl border-2 border-transparent bg-gray-50 text-xs font-semibold text-gray-600 hover:bg-pink-50 flex items-center gap-2">
+                            <i class="fa-solid fa-grip-vertical"></i> 3 Strip Classic
+                        </button>
+                        <button onclick="selectLayout('grid-2x2')" id="layout-grid-2x2" class="layout-btn p-2 rounded-xl border-2 border-transparent bg-gray-50 text-xs font-semibold text-gray-600 hover:bg-pink-50 flex items-center gap-2">
+                            <i class="fa-solid fa-border-all"></i> Grid 2x2
+                        </button>
+                        <button onclick="selectLayout('postcard')" id="layout-postcard" class="layout-btn p-2 rounded-xl border-2 border-transparent bg-gray-50 text-xs font-semibold text-gray-600 hover:bg-pink-50 flex items-center gap-2">
+                            <i class="fa-solid fa-id-card"></i> Polaroid Wide
+                        </button>
+                        <button onclick="selectLayout('mega-8')" id="layout-mega-8" class="layout-btn p-2 rounded-xl border-2 border-transparent bg-gray-50 text-xs font-semibold text-gray-600 hover:bg-pink-50 flex items-center gap-2">
+                            <i class="fa-solid fa-grip"></i> 8 Foto Mega Grid
+                        </button>
+                    </div>
+
+                    <!-- Live Captured Grid -->
+                    <div id="captured-grid" class="grid grid-cols-3 gap-2 min-h-[160px] bg-pink-50/50 p-3 rounded-2xl border border-pink-100 border-dashed">
+                        <div class="col-span-3 flex flex-col items-center justify-center text-gray-400 text-xs py-8">
+                            <i class="fa-solid fa-camera-retro text-3xl mb-2 opacity-40"></i>
+                            <span>Klik 'Mulai Sesi Foto' untuk mengambil pose!</span>
+                        </div>
+                    </div>
+
+                    <button onclick="goToStep(2)" id="to-step-2-btn" class="mt-2 w-full py-3 bg-gray-800 hover:bg-black text-white font-bold rounded-xl shadow-md text-xs transition-all disabled:opacity-40 disabled:cursor-not-allowed" disabled>
+                        Lanjut ke Retake, Frame & Stiker <i class="fa-solid fa-arrow-right ml-1"></i>
+                    </button>
+                </div>
+            </section>
+
+            <!-- SECTION 2: EDITING, RETAKE, BACKGROUND & STICKERS -->
+            <section id="section-edit" class="hidden grid-cols-1 lg:grid-cols-3 gap-6 items-start">
+                <!-- Left: Frame Preview -->
+                <div class="lg:col-span-2 glass-panel p-6 rounded-3xl flex flex-col items-center justify-center gap-4 relative overflow-hidden">
+                    <div class="w-full flex items-center justify-between mb-2">
+                        <h3 class="font-bold text-gray-700 text-xs flex items-center gap-2">
+                            <i class="fa-solid fa-wand-magic-sparkles text-pink-500"></i> Interactive Frame & Drag Sticker
+                        </h3>
+                        <span class="text-[10px] bg-pink-100 text-pink-600 px-3 py-1 rounded-full font-medium">Bisa drag stiker, aksesoris & logo kampus!</span>
+                    </div>
+
+                    <div id="preview-container" class="relative max-w-full overflow-auto flex justify-center p-4 bg-gray-100/70 rounded-2xl shadow-inner min-h-[480px] w-full">
+                        <div id="photobooth-card" class="relative bg-polaroid-white shadow-2xl p-4 transition-all duration-300 flex flex-col items-center" style="width: 340px;">
+                            
+                            <!-- Header Title (Editable) -->
+                            <div id="frame-header" class="text-center w-full mb-3 flex flex-col items-center gap-1">
+                                <h4 id="frame-title-text" contenteditable="true" class="font-cursive text-2xl font-bold text-gray-800 outline-none border-b border-transparent hover:border-pink-300 focus:border-pink-400 px-2">nazsapict studio</h4>
+                                <p id="frame-subtitle-text" contenteditable="true" class="text-[9px] uppercase tracking-wider text-pink-400 font-semibold outline-none border-b border-transparent hover:border-pink-300 focus:border-pink-400 px-1">Memories Captured</p>
+                            </div>
+
+                            <div id="frame-photos-container" class="w-full flex flex-col gap-2"></div>
+
+                            <div id="frame-footer" class="mt-4 pt-2 w-full border-t border-dashed border-gray-300 flex items-center justify-between text-[10px] text-gray-500">
+                                <span id="frame-date" contenteditable="true" class="outline-none">2026.11.11</span>
+                                <span id="frame-brand-tag" contenteditable="true" class="font-bold text-pink-600 outline-none">by ssbillanzila</span>
+                            </div>
+
+                            <div id="sticker-canvas-overlay" class="absolute inset-0 pointer-events-none z-20 overflow-hidden"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Customizer Control Panel -->
+                <div class="glass-panel p-5 rounded-3xl flex flex-col gap-5 max-h-[750px] overflow-y-auto">
+                    <!-- Retake Individual Slots -->
+                    <div class="flex flex-col gap-2 border-b border-pink-100 pb-3">
+                        <label class="text-xs font-bold text-gray-700 flex items-center justify-between">
+                            <span><i class="fa-solid fa-rotate-left text-pink-500"></i> Retake Foto Per Slot:</span>
+                            <button onclick="retakeAllPhotos()" class="text-[10px] text-red-500 hover:underline">Retake Semua</button>
+                        </label>
+                        <div id="retake-slots-container" class="grid grid-cols-3 gap-2"></div>
+                    </div>
+
+                    <!-- PREMIER TEMPLATES (Sesuai Referensi Gambar Pengguna) -->
+                    <div class="flex flex-col gap-2 border-b border-pink-100 pb-3">
+                        <label class="text-xs font-bold text-pink-600 flex items-center gap-1.5">
+                            <i class="fa-solid fa-crown text-amber-500"></i> EKSKLUSIF PREMIER TEMPLATES ✨:
+                        </label>
+                        <div class="grid grid-cols-3 gap-2">
+                            <button onclick="applyPremierTemplate('navy-ribbon')" class="p-2 rounded-xl border border-blue-900 bg-[#1B2A4A] text-white text-[11px] font-bold text-left transition hover:scale-102 flex flex-col gap-1">
+                                <span>💙 Blue Navy</span>
+                                <span class="text-[9px] text-blue-200">Ribbon & Pearl</span>
+                            </button>
+                            <button onclick="applyPremierTemplate('classical-ticket')" class="p-2 rounded-xl border border-red-950 bg-[#4A0E17] text-amber-100 text-[11px] font-bold text-left transition hover:scale-102 flex flex-col gap-1">
+                                <span>🎟️ Classical</span>
+                                <span class="text-[9px] text-amber-300">Ticket Strip</span>
+                            </button>
+                            <button onclick="applyPremierTemplate('cartoon-y2k')" class="p-2 rounded-xl border border-pink-300 bg-pink-100 text-pink-800 text-[11px] font-bold text-left transition hover:scale-102 flex flex-col gap-1">
+                                <span>🎀 Polkadot Y2K</span>
+                                <span class="text-[9px] text-pink-600">Cartoon Cute</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Solid Colors & Polkadot Backgrounds (Tanpa Gradasi) -->
+                    <div class="flex flex-col gap-2 border-b border-pink-100 pb-3">
+                        <div class="flex items-center justify-between">
+                            <label class="text-xs font-bold text-gray-700">Background Polkadot & Warna Bebas:</label>
+                            <!-- Custom Color Picker Bebas -->
+                            <div class="flex items-center gap-1">
+                                <span class="text-[10px] text-gray-500">Custom:</span>
+                                <input type="color" id="custom-bg-picker" value="#FFD1DC" onchange="applyCustomBackgroundColor(this.value)" class="w-6 h-6 rounded-md cursor-pointer border border-pink-300">
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2">
+                            <button onclick="applyBackgroundStyle('bg-polkadot-pink', '#FFD1DC', '#4A3E3D')" class="p-2 rounded-xl border border-pink-200 bg-pink-100 text-left transition flex items-center gap-2">
+                                <span class="w-5 h-5 rounded-md bg-pink-300"></span>
+                                <span class="text-xs font-semibold text-pink-700">Polkadot Pink 🌸</span>
+                            </button>
+                            <button onclick="applyBackgroundStyle('bg-polkadot-blue', '#1E3A8A', '#FFFFFF')" class="p-2 rounded-xl border border-blue-900 bg-blue-900 text-white text-left transition flex items-center gap-2">
+                                <span class="w-5 h-5 rounded-md bg-blue-600"></span>
+                                <span class="text-xs font-semibold text-blue-200">Polkadot Blue 💙</span>
+                            </button>
+                            <button onclick="applyBackgroundStyle('bg-polaroid-white', '#ffffff', '#333333')" class="p-2 rounded-xl border border-gray-200 bg-white text-left transition flex items-center gap-2">
+                                <span class="w-5 h-5 rounded-md bg-white border border-gray-300"></span>
+                                <span class="text-xs font-semibold text-gray-700">Polaroid White 🖼️</span>
+                            </button>
+                            <button onclick="applyBackgroundStyle('bg-coquette-pink', '#FFD1DC', '#4A3E3D')" class="p-2 rounded-xl border border-pink-200 bg-pink-100 text-left transition flex items-center gap-2">
+                                <span class="w-5 h-5 rounded-md bg-pink-300"></span>
+                                <span class="text-xs font-semibold text-pink-700">Solid Pink 🎀</span>
+                            </button>
+                            <button onclick="applyBackgroundStyle('bg-solid-black', '#18181B', '#F472B6')" class="p-2 rounded-xl border border-zinc-700 bg-zinc-900 text-pink-300 text-left transition flex items-center gap-2">
+                                <span class="w-5 h-5 rounded-md bg-zinc-800 border border-pink-400"></span>
+                                <span class="text-xs font-semibold text-pink-300">Solid Black ✨</span>
+                            </button>
+                            <button onclick="applyBackgroundStyle('bg-sanrio-pastel', '#FCE7F3', '#BE185D')" class="p-2 rounded-xl border border-pink-200 bg-[#FCE7F3] text-left transition flex items-center gap-2">
+                                <span class="w-5 h-5 rounded-md bg-pink-300"></span>
+                                <span class="text-xs font-semibold text-pink-800">Sanrio Pastel 🧸</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Sticker, Campus Logos & Head Accessories Library with Tabs -->
+                    <div class="flex flex-col gap-2">
+                        <div class="flex items-center justify-between">
+                            <label class="text-xs font-bold text-gray-600">Stiker, Logo Kampus & Aksesoris:</label>
+                            <button onclick="clearStickers()" class="text-[10px] bg-red-100 text-red-500 font-semibold px-2 py-0.5 rounded-lg hover:bg-red-200">Hapus Semua</button>
+                        </div>
+
+                        <div class="flex gap-1 overflow-x-auto text-[11px] font-bold text-gray-500 border-b border-pink-100 pb-1">
+                            <button onclick="switchStickerTab('cute')" id="tab-cute" class="px-2.5 py-1 bg-pink-100 text-pink-700 rounded-lg">Cute 🎀</button>
+                            <button onclick="switchStickerTab('campus')" id="tab-campus" class="px-2.5 py-1 hover:bg-pink-50 rounded-lg">Logo Kampus 🎓</button>
+                            <button onclick="switchStickerTab('head')" id="tab-head" class="px-2.5 py-1 hover:bg-pink-50 rounded-lg">Aksesoris Kepala ✨</button>
+                        </div>
+
+                        <div id="sticker-grid" class="grid grid-cols-5 gap-2 p-2 bg-pink-50/40 rounded-xl border border-pink-100 max-h-36 overflow-y-auto">
+                            <!-- Filled by JS -->
+                        </div>
+                    </div>
+
+                    <button onclick="goToStep(3)" class="mt-2 w-full py-3.5 bg-nazsa-rose hover:bg-pink-400 text-white font-bold rounded-xl shadow-md text-xs transition-transform active:scale-98">
+                        Lanjut ke Selesai & Download <i class="fa-solid fa-arrow-right ml-1"></i>
+                    </button>
+                </div>
+            </section>
+
+            <!-- SECTION 3: DOWNLOAD & QR CODE -->
+            <section id="section-download" class="hidden flex-col items-center justify-center gap-6 max-w-2xl mx-auto w-full">
+                <div class="glass-panel p-8 rounded-3xl w-full text-center flex flex-col items-center gap-6 shadow-xl border border-pink-200">
+                    <div class="w-16 h-16 rounded-full bg-pink-100 text-nazsa-rose flex items-center justify-center text-3xl">
+                        🎉
+                    </div>
+
+                    <div>
+                        <h2 class="font-cursive text-4xl font-bold text-gray-800">Foto Siap Diunduh!</h2>
+                        <p class="text-xs text-gray-500 mt-1">Simpan hasil foto strip aesthetic kamu dan bagikan ke Instagram @ssbillanzila.</p>
+                    </div>
+
+                    <!-- Canvas Rendering Box -->
+                    <div class="relative max-w-full overflow-hidden rounded-2xl shadow-lg border border-pink-200 bg-white p-2">
+                        <canvas id="final-canvas" class="max-w-full h-auto rounded-xl"></canvas>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
+                        <button onclick="downloadPhotoboothImage()" class="w-full py-3.5 bg-nazsa-rose hover:bg-pink-400 text-white font-bold text-sm rounded-xl shadow-md flex items-center justify-center gap-2 transition">
+                            <i class="fa-solid fa-download"></i> Unduh Foto HD (.png)
+                        </button>
+                        <button onclick="generateQRCodeModal()" class="w-full py-3.5 bg-gray-800 hover:bg-black text-white font-bold text-sm rounded-xl shadow-md flex items-center justify-center gap-2 transition">
+                            <i class="fa-solid fa-qrcode"></i> Tampilkan QR Code Instan
+                        </button>
+                    </div>
+
+                    <div class="flex items-center gap-4 mt-2">
+                        <a href="https://www.instagram.com/ssbillanzila/?utm_source=ig_web_button_share_sheet" target="_blank" class="text-xs font-bold text-pink-600 hover:underline flex items-center gap-1">
+                            <i class="fa-brands fa-instagram text-sm"></i> Tag IG @ssbillanzila
+                        </a>
+                        <span class="text-gray-300">|</span>
+                        <button onclick="resetPhotobooth()" class="text-xs text-gray-600 hover:underline font-semibold flex items-center gap-1">
+                            <i class="fa-solid fa-arrows-rotate"></i> Buat Foto Baru Lagi
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- QR CODE MODAL -->
+    <div id="qr-modal" class="hidden fixed inset-0 z-50 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4">
+        <div class="glass-panel p-6 rounded-3xl max-w-sm w-full flex flex-col items-center gap-4 text-center relative border-2 border-pink-200">
+            <button onclick="closeQRModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <h3 class="font-bold text-gray-800 text-lg">Scan QR Code Instan 📱</h3>
+            <p class="text-xs text-gray-500">Scan QR Code di bawah ini untuk mengunduh foto langsung atau kunjungi IG @ssbillanzila.</p>
+            
+            <div id="qrcode-box" class="p-4 bg-white rounded-2xl shadow-inner border border-pink-100 flex items-center justify-center min-w-[180px] min-h-[180px]"></div>
+
+            <p class="text-[10px] text-pink-400 font-semibold uppercase tracking-wider">nazsapict by ssbillanzila</p>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT APP LOGIC -->
+    <script>
+        let webcamStream = null;
+        let selectedLayout = 'double-6';
+        let layoutCounts = {
+            'double-6': 6,
+            'vertical-6': 6,
+            'double-4': 4,
+            'vertical-4': 4,
+            'vertical-3': 3,
+            'grid-2x2': 4,
+            'postcard': 2,
+            'mega-8': 8
+        };
+        let capturedPhotos = [];
+        let timerSeconds = 3;
+        let currentFilter = 'filter-normal';
+        let currentBgClass = 'bg-polaroid-white';
+        let currentCustomBgColor = null;
+        let isFlashOn = false;
+        let activeStickers = [];
+
+        // Data Stiker, Logo Kampus & Aksesoris Kepala Lengkap
+        const stickerSets = {
+            cute: ['🎀', '🌸', '💖', '🧸', '🐰', '🍒', '🍓', '🧁', '👑', '🌷', '⭐', '🦋', '🎈', '💌', '💎'],
+            campus: ['🏛️ USU', '🎓 UI', '🏛️ ITB', '🎓 UGM', '🏛️ UNDIP', '🎓 UMSU', '🏛️ UNIMED', '🎓 POLMED', '🎓 BINUS', '⭐ Kampus Vibe', '📚 Mahasiswa', '💻 Informatics'],
+            head: ['👑', '🎓', '🎀', '🐰', '🐱', '👼', '🌸', '🎩', '⭐', '🦋', '🎧', '💎']
+        };
+
+        const webcam = document.getElementById('webcam');
+        const capturedGrid = document.getElementById('captured-grid');
+        const photoboothCard = document.getElementById('photobooth-card');
+        const framePhotosContainer = document.getElementById('frame-photos-container');
+        const stickerCanvasOverlay = document.getElementById('sticker-canvas-overlay');
+        const retakeSlotsContainer = document.getElementById('retake-slots-container');
+
+        function startAppFromIntro() {
+            document.getElementById('intro-screen').classList.add('hidden');
+            document.getElementById('main-app').classList.remove('hidden');
+            document.getElementById('main-app').classList.add('flex');
+            initWebcam();
+            renderStickerGrid('cute');
+        }
+
+        function goToIntro() {
+            document.getElementById('main-app').classList.add('hidden');
+            document.getElementById('intro-screen').classList.remove('hidden');
+            stopWebcam();
+        }
+
+        function goToStep(step) {
+            document.getElementById('section-studio').classList.add('hidden');
+            document.getElementById('section-edit').classList.add('hidden');
+            document.getElementById('section-download').classList.add('hidden');
+
+            [1, 2, 3].forEach(i => {
+                const btn = document.getElementById(`step-btn-${i}`);
+                btn.className = "step-tab flex items-center gap-2 px-4 py-2 rounded-full bg-white text-gray-400 border border-pink-100 text-xs font-semibold transition-all";
+            });
+
+            const activeBtn = document.getElementById(`step-btn-${step}`);
+            activeBtn.className = "step-tab flex items-center gap-2 px-4 py-2 rounded-full bg-nazsa-rose text-white text-xs font-semibold shadow-md shadow-pink-200 transition-all";
+
+            if (step === 1) {
+                document.getElementById('section-studio').classList.remove('hidden');
+            } else if (step === 2) {
+                document.getElementById('section-edit').classList.remove('hidden');
+                document.getElementById('section-edit').classList.add('grid');
+                renderFramePreview();
+                renderRetakeSlots();
+            } else if (step === 3) {
+                document.getElementById('section-download').classList.remove('hidden');
+                document.getElementById('section-download').classList.add('flex');
+                renderFinalCanvas();
+            }
+        }
+
+        async function initWebcam() {
+            try {
+                webcamStream = await navigator.mediaDevices.getUserMedia({ video: { width: 1280, height: 960 }, audio: false });
+                webcam.srcObject = webcamStream;
+            } catch (err) {
+                console.error("Kamera error:", err);
+                alert("Gagal mengakses kamera. Harap izinkan akses kamera pada browser Anda.");
+            }
+        }
+
+        function stopWebcam() {
+            if (webcamStream) {
+                webcamStream.getTracks().forEach(track => track.stop());
+            }
+        }
+
+        function toggleScreenFlash() {
+            isFlashOn = !isFlashOn;
+            const statusText = document.getElementById('flash-status-text');
+            const toggleBtn = document.getElementById('ring-flash-toggle');
+            const webcamBox = document.getElementById('webcam-box');
+
+            if (isFlashOn) {
+                statusText.innerText = 'ON';
+                toggleBtn.className = 'px-2.5 py-1 rounded-full text-[11px] font-bold bg-yellow-400 text-gray-900 border border-yellow-500 flex items-center gap-1 transition shadow-md';
+                webcamBox.classList.add('screen-flash-active');
+            } else {
+                statusText.innerText = 'OFF';
+                toggleBtn.className = 'px-2.5 py-1 rounded-full text-[11px] font-bold bg-gray-100 text-gray-600 border border-gray-200 flex items-center gap-1 transition';
+                webcamBox.classList.remove('screen-flash-active');
+            }
+        }
+
+        function setTimer(sec) {
+            timerSeconds = sec;
+            [3, 5, 10].forEach(s => {
+                const btn = document.getElementById(`timer-${s}`);
+                if (s === sec) {
+                    btn.className = "timer-btn px-3 py-1 rounded-lg text-xs font-bold bg-white text-pink-600 shadow-xs";
+                } else {
+                    btn.className = "timer-btn px-3 py-1 rounded-lg text-xs font-bold text-gray-500 hover:bg-white/50";
+                }
+            });
+        }
+
+        function applyFilter(filterClass) {
+            currentFilter = filterClass;
+            webcam.className = `w-full h-full object-cover transform -scale-x-100 ${filterClass}`;
+        }
+
+        function selectLayout(layoutKey) {
+            selectedLayout = layoutKey;
+            document.querySelectorAll('.layout-btn').forEach(btn => {
+                btn.classList.remove('border-nazsa-rose', 'bg-pink-50', 'text-pink-700');
+                btn.classList.add('border-transparent', 'bg-gray-50', 'text-gray-600');
+            });
+            const activeBtn = document.getElementById(`layout-${layoutKey}`);
+            if (activeBtn) {
+                activeBtn.classList.remove('border-transparent', 'bg-gray-50', 'text-gray-600');
+                activeBtn.classList.add('border-nazsa-rose', 'bg-pink-50', 'text-pink-700');
+            }
+        }
+
+        async function startPhotoSession() {
+            capturedPhotos = [];
+            const countNeeded = layoutCounts[selectedLayout] || 4;
+            const countdownOverlay = document.getElementById('countdown-overlay');
+            const countdownText = document.getElementById('countdown-text');
+            const captureStatus = document.getElementById('capture-status');
+            const captureCount = document.getElementById('capture-count');
+            const startBtn = document.getElementById('start-session-btn');
+
+            startBtn.disabled = true;
+            captureStatus.classList.remove('hidden');
+
+            for (let i = 1; i <= countNeeded; i++) {
+                captureCount.innerText = `${i}/${countNeeded}`;
+                countdownOverlay.classList.remove('hidden');
+
+                for (let c = timerSeconds; c > 0; c--) {
+                    countdownText.innerText = c;
+                    await new Promise(r => setTimeout(r, 1000));
+                }
+
+                countdownOverlay.classList.add('hidden');
+
+                if (isFlashOn) {
+                    const flashOverlay = document.getElementById('flash-overlay');
+                    flashOverlay.style.opacity = '0.9';
+                    setTimeout(() => { flashOverlay.style.opacity = '0'; }, 150);
+                }
+
+                const photoData = captureCanvasPhoto();
+                capturedPhotos.push(photoData);
+                renderCapturedGrid();
+                await new Promise(r => setTimeout(r, 600));
+            }
+
+            captureStatus.classList.add('hidden');
+            startBtn.disabled = false;
+            document.getElementById('to-step-2-btn').disabled = false;
+        }
+
+        function captureCanvasPhoto() {
+            const canvas = document.createElement('canvas');
+            canvas.width = webcam.videoWidth || 640;
+            canvas.height = webcam.videoHeight || 480;
+            const ctx = canvas.getContext('2d');
+            ctx.translate(canvas.width, 0);
+            ctx.scale(-1, 1);
+            ctx.drawImage(webcam, 0, 0, canvas.width, canvas.height);
+            return canvas.toDataURL('image/png');
+        }
+
+        function renderCapturedGrid() {
+            capturedGrid.innerHTML = '';
+            capturedPhotos.forEach((imgSrc, idx) => {
+                const item = document.createElement('div');
+                item.className = 'relative aspect-[4/3] rounded-lg overflow-hidden border border-pink-200 shadow-xs bg-black';
+                item.innerHTML = `<img src="${imgSrc}" class="w-full h-full object-cover ${currentFilter}">
+                                  <span class="absolute top-1 left-1 bg-black/60 text-white text-[9px] px-1.5 py-0.5 rounded-full font-bold">#${idx+1}</span>`;
+                capturedGrid.appendChild(item);
+            });
+        }
+
+        async function retakeSingleSlot(index) {
+            const countdownOverlay = document.getElementById('countdown-overlay');
+            const countdownText = document.getElementById('countdown-text');
+            countdownOverlay.classList.remove('hidden');
+
+            for (let c = timerSeconds; c > 0; c--) {
+                countdownText.innerText = c;
+                await new Promise(r => setTimeout(r, 1000));
+            }
+
+            countdownOverlay.classList.add('hidden');
+            if (isFlashOn) {
+                const flashOverlay = document.getElementById('flash-overlay');
+                flashOverlay.style.opacity = '0.9';
+                setTimeout(() => { flashOverlay.style.opacity = '0'; }, 150);
+            }
+
+            capturedPhotos[index] = captureCanvasPhoto();
+            renderCapturedGrid();
+            renderFramePreview();
+            renderRetakeSlots();
+        }
+
+        function retakeAllPhotos() {
+            goToStep(1);
+        }
+
+        function renderRetakeSlots() {
+            retakeSlotsContainer.innerHTML = '';
+            capturedPhotos.forEach((_, idx) => {
+                const btn = document.createElement('button');
+                btn.onclick = () => retakeSingleSlot(idx);
+                btn.className = 'p-1.5 bg-pink-50 border border-pink-200 rounded-lg text-[10px] font-bold text-pink-700 hover:bg-pink-100 transition flex items-center justify-center gap-1';
+                btn.innerHTML = `<i class="fa-solid fa-camera text-xs"></i> Slot #${idx+1}`;
+                retakeSlotsContainer.appendChild(btn);
+            });
+        }
+
+        function applyBackgroundStyle(bgClass, bgHex, textColor) {
+            currentBgClass = bgClass;
+            currentCustomBgColor = null;
+            photoboothCard.className = `relative shadow-2xl p-4 transition-all duration-300 flex flex-col items-center ${bgClass}`;
+            photoboothCard.style.backgroundColor = '';
+            photoboothCard.style.color = textColor;
+        }
+
+        function applyCustomBackgroundColor(colorHex) {
+            currentBgClass = 'custom-solid';
+            currentCustomBgColor = colorHex;
+            photoboothCard.className = `relative shadow-2xl p-4 transition-all duration-300 flex flex-col items-center`;
+            photoboothCard.style.backgroundColor = colorHex;
+            photoboothCard.style.backgroundImage = 'none';
+            photoboothCard.style.color = '#4A3E3D';
+        }
+
+        function applyPremierTemplate(templateKey) {
+            if (templateKey === 'navy-ribbon') {
+                currentBgClass = 'bg-navy-ribbon';
+                photoboothCard.className = `relative shadow-2xl p-4 transition-all duration-300 flex flex-col items-center bg-navy-ribbon`;
+                photoboothCard.style.backgroundColor = '#1B2A4A';
+                photoboothCard.style.color = '#FFFFFF';
+                document.getElementById('frame-title-text').innerText = 'Blue Navy Ribbon 💙';
+            } else if (templateKey === 'classical-ticket') {
+                currentBgClass = 'bg-classical-ticket';
+                photoboothCard.className = `relative shadow-2xl p-4 transition-all duration-300 flex flex-col items-center bg-classical-ticket`;
+                photoboothCard.style.backgroundColor = '#4A0E17';
+                photoboothCard.style.color = '#F3E8EE';
+                document.getElementById('frame-title-text').innerText = 'Classical Music 🎟️';
+            } else if (templateKey === 'cartoon-y2k') {
+                currentBgClass = 'bg-cartoon-y2k';
+                photoboothCard.className = `relative shadow-2xl p-4 transition-all duration-300 flex flex-col items-center bg-cartoon-y2k`;
+                photoboothCard.style.backgroundColor = '#FCE7F3';
+                photoboothCard.style.color = '#831843';
+                document.getElementById('frame-title-text').innerText = 'Polkadot Y2K ✨';
+            }
+        }
+
+        function renderFramePreview() {
+            framePhotosContainer.innerHTML = '';
+            
+            if (selectedLayout === 'double-6') {
+                photoboothCard.style.width = '360px';
+                framePhotosContainer.className = 'w-full grid grid-cols-2 gap-2';
+            } else if (selectedLayout === 'double-4') {
+                photoboothCard.style.width = '340px';
+                framePhotosContainer.className = 'w-full grid grid-cols-2 gap-2';
+            } else if (selectedLayout === 'grid-2x2') {
+                photoboothCard.style.width = '320px';
+                framePhotosContainer.className = 'w-full grid grid-cols-2 gap-2';
+            } else if (selectedLayout === 'postcard') {
+                photoboothCard.style.width = '380px';
+                framePhotosContainer.className = 'w-full grid grid-cols-2 gap-2';
+            } else if (selectedLayout === 'mega-8') {
+                photoboothCard.style.width = '360px';
+                framePhotosContainer.className = 'w-full grid grid-cols-2 gap-1.5';
+            } else {
+                photoboothCard.style.width = '280px';
+                framePhotosContainer.className = 'w-full flex flex-col gap-2';
+            }
+
+            capturedPhotos.forEach((src) => {
+                const imgWrap = document.createElement('div');
+                imgWrap.className = 'w-full aspect-[4/3] bg-black rounded-sm overflow-hidden border border-black/10 shadow-xs';
+                imgWrap.innerHTML = `<img src="${src}" class="w-full h-full object-cover ${currentFilter}">`;
+                framePhotosContainer.appendChild(imgWrap);
+            });
+        }
+
+        function switchStickerTab(category) {
+            ['cute', 'campus', 'head'].forEach(cat => {
+                const tab = document.getElementById(`tab-${cat}`);
+                if (cat === category) {
+                    tab.className = "px-2.5 py-1 bg-pink-100 text-pink-700 rounded-lg font-bold";
+                } else {
+                    tab.className = "px-2.5 py-1 hover:bg-pink-50 rounded-lg text-gray-500 font-bold";
+                }
+            });
+            renderStickerGrid(category);
+        }
+
+        function renderStickerGrid(category) {
+            const grid = document.getElementById('sticker-grid');
+            grid.innerHTML = '';
+            stickerSets[category].forEach(itemText => {
+                const btn = document.createElement('button');
+                btn.className = category === 'campus' ? 'text-xs p-1.5 bg-white border border-pink-200 rounded-lg font-bold text-pink-700 hover:bg-pink-50 transition' : 'text-2xl p-1 hover:scale-125 transition-transform flex items-center justify-center';
+                btn.innerText = itemText;
+                btn.onclick = () => addStickerToCard(itemText, category === 'campus');
+                grid.appendChild(btn);
+            });
+        }
+
+        function addStickerToCard(text, isCampusBadge = false) {
+            const stickerId = 'sticker-' + Date.now();
+            const stickerEl = document.createElement('div');
+            stickerEl.id = stickerId;
+            stickerEl.className = isCampusBadge ? 'sticker-item px-3 py-1 bg-white/90 border border-pink-300 rounded-xl text-xs font-bold text-pink-700 shadow-md pointer-events-auto' : 'sticker-item text-3xl pointer-events-auto';
+            stickerEl.innerText = text;
+            stickerEl.style.left = '35%';
+            stickerEl.style.top = '40%';
+
+            makeElementDraggable(stickerEl);
+            stickerCanvasOverlay.appendChild(stickerEl);
+            activeStickers.push({ id: stickerId, text: text, x: 35, y: 40, isBadge: isCampusBadge });
+        }
+
+        function clearStickers() {
+            stickerCanvasOverlay.innerHTML = '';
+            activeStickers = [];
+        }
+
+        function makeElementDraggable(elmnt) {
+            let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+            elmnt.onmousedown = dragMouseDown;
+            elmnt.ontouchstart = dragMouseDown;
+
+            function dragMouseDown(e) {
+                e = e || window.event;
+                e.preventDefault();
+                const clientX = e.clientX || (e.touches && e.touches[0].clientX);
+                const clientY = e.clientY || (e.touches && e.touches[0].clientY);
+                pos3 = clientX;
+                pos4 = clientY;
+                document.onmouseup = closeDragElement;
+                document.ontouchend = closeDragElement;
+                document.onmousemove = elementDrag;
+                document.ontouchmove = elementDrag;
+            }
+
+            function elementDrag(e) {
+                e = e || window.event;
+                const clientX = e.clientX || (e.touches && e.touches[0].clientX);
+                const clientY = e.clientY || (e.touches && e.touches[0].clientY);
+                pos1 = pos3 - clientX;
+                pos2 = pos4 - clientY;
+                pos3 = clientX;
+                pos4 = clientY;
+                elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+                elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+            }
+
+            function closeDragElement() {
+                document.onmouseup = null;
+                document.onmousemove = null;
+                document.ontouchend = null;
+                document.ontouchmove = null;
+            }
+        }
+
+        function renderFinalCanvas() {
+            const canvas = document.getElementById('final-canvas');
+            const ctx = canvas.getContext('2d');
+            
+            const cardWidth = photoboothCard.offsetWidth || 340;
+            const cardHeight = photoboothCard.offsetHeight || 500;
+            
+            canvas.width = cardWidth * 2;
+            canvas.height = cardHeight * 2;
+            ctx.scale(2, 2);
+
+            // Fill Background Solid/Polkadot
+            ctx.fillStyle = '#FFFFFF';
+            if (currentCustomBgColor) {
+                ctx.fillStyle = currentCustomBgColor;
+            } else if (currentBgClass === 'bg-coquette-pink') {
+                ctx.fillStyle = '#FFD1DC';
+            } else if (currentBgClass === 'bg-polkadot-pink') {
+                ctx.fillStyle = '#FFD1DC';
+            } else if (currentBgClass === 'bg-polkadot-blue') {
+                ctx.fillStyle = '#1E3A8A';
+            } else if (currentBgClass === 'bg-solid-black') {
+                ctx.fillStyle = '#18181B';
+            } else if (currentBgClass === 'bg-navy-ribbon') {
+                ctx.fillStyle = '#1B2A4A';
+            } else if (currentBgClass === 'bg-classical-ticket') {
+                ctx.fillStyle = '#4A0E17';
+            } else if (currentBgClass === 'bg-cartoon-y2k') {
+                ctx.fillStyle = '#FCE7F3';
+            } else if (currentBgClass === 'bg-sanrio-pastel') {
+                ctx.fillStyle = '#FCE7F3';
+            }
+            ctx.fillRect(0, 0, cardWidth, cardHeight);
+
+            // Draw Edited Header Text
+            const titleText = document.getElementById('frame-title-text').innerText;
+            const subtitleText = document.getElementById('frame-subtitle-text').innerText;
+            const dateText = document.getElementById('frame-date').innerText;
+            const brandText = document.getElementById('frame-brand-tag').innerText;
+
+            ctx.fillStyle = (currentBgClass === 'bg-solid-black' || currentBgClass === 'bg-navy-ribbon' || currentBgClass === 'bg-polkadot-blue') ? '#F472B6' : '#4A3E3D';
+            if (currentBgClass === 'bg-classical-ticket') ctx.fillStyle = '#F3E8EE';
+
+            ctx.font = 'bold 24px Sacramento, cursive';
+            ctx.textAlign = 'center';
+            ctx.fillText(titleText, cardWidth / 2, 35);
+
+            ctx.font = 'bold 9px Plus Jakarta Sans, sans-serif';
+            ctx.fillText(subtitleText.toUpperCase(), cardWidth / 2, 48);
+
+            const imgs = framePhotosContainer.querySelectorAll('img');
+            let loadedCount = 0;
+
+            if (imgs.length === 0) return;
+
+            imgs.forEach((img, idx) => {
+                const tempImg = new Image();
+                tempImg.crossOrigin = 'anonymous';
+                tempImg.src = img.src;
+                tempImg.onload = () => {
+                    loadedCount++;
+                    const imgEl = framePhotosContainer.children[idx];
+                    const rect = imgEl.getBoundingClientRect();
+                    const cardRect = photoboothCard.getBoundingClientRect();
+
+                    const x = rect.left - cardRect.left;
+                    const y = rect.top - cardRect.top;
+                    const w = rect.width;
+                    const h = rect.height;
+
+                    ctx.drawImage(tempImg, x, y, w, h);
+
+                    if (loadedCount === imgs.length) {
+                        const stickers = stickerCanvasOverlay.querySelectorAll('.sticker-item');
+                        stickers.forEach(st => {
+                            const stRect = st.getBoundingClientRect();
+                            const stX = stRect.left - cardRect.left;
+                            const stY = stRect.top - cardRect.top + 24;
+                            if (st.classList.contains('bg-white/90')) {
+                                ctx.fillStyle = '#FFFFFF';
+                                ctx.fillRect(stX - 4, stY - 18, st.offsetWidth, st.offsetHeight);
+                                ctx.fillStyle = '#DB2777';
+                                ctx.font = 'bold 12px Plus Jakarta Sans, sans-serif';
+                                ctx.fillText(st.innerText, stX, stY - 4);
+                            } else {
+                                ctx.font = '28px serif';
+                                ctx.fillText(st.innerText, stX, stY);
+                            }
+                        });
+
+                        ctx.fillStyle = '#A0AEC0';
+                        ctx.font = '10px Plus Jakarta Sans, sans-serif';
+                        ctx.textAlign = 'left';
+                        ctx.fillText(dateText, 15, cardHeight - 15);
+                        ctx.textAlign = 'right';
+                        ctx.fillText(brandText, cardWidth - 15, cardHeight - 15);
+                    }
+                };
+            });
+        }
+
+        function downloadPhotoboothImage() {
+            const canvas = document.getElementById('final-canvas');
+            const link = document.createElement('a');
+            link.download = `nazsapict-ssbillanzila-${Date.now()}.png`;
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        }
+
+        function generateQRCodeModal() {
+            const modal = document.getElementById('qr-modal');
+            const qrBox = document.getElementById('qrcode-box');
+            qrBox.innerHTML = '';
+            modal.classList.remove('hidden');
+
+            new QRCode(qrBox, {
+                text: "https://www.instagram.com/ssbillanzila/?utm_source=ig_web_button_share_sheet",
+                width: 160,
+                height: 160,
+                colorDark: "#E88D9C",
+                colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.H
+            });
+        }
+
+        function closeQRModal() {
+            document.getElementById('qr-modal').classList.add('hidden');
+        }
+
+        function resetPhotobooth() {
+            capturedPhotos = [];
+            activeStickers = [];
+            stickerCanvasOverlay.innerHTML = '';
+            renderCapturedGrid();
+            goToStep(1);
+        }
+    </script>
+</body>
+</html>
